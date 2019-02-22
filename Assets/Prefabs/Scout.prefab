@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7160700574840676912}
   m_Layer: 0
   m_Name: Barrel
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,11 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3885253102380442035}
   - component: {fileID: 9055758135618967294}
-  - component: {fileID: 8715283646472491534}
-  - component: {fileID: 4576762292164227885}
   m_Layer: 0
   m_Name: Spaceship
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,58 +109,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8715283646472491534
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4933022613546513693}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.15464006}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.94, y: 1.48}
-    newSize: {x: 1.36, y: 0.84}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8593471, y: 0.52016485}
-  m_EdgeRadius: 0
---- !u!61 &4576762292164227885
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4933022613546513693}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.4239272}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.94, y: 1.48}
-    newSize: {x: 1.36, y: 0.84}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.32211918, y: 0.63214564}
-  m_EdgeRadius: 0
 --- !u!1 &7991762787055448613
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +123,8 @@ GameObject:
   - component: {fileID: 7605006296875512617}
   - component: {fileID: 6758349305610546003}
   - component: {fileID: 2653412951422022524}
+  - component: {fileID: 2740406108096194296}
+  - component: {fileID: 127180182335178474}
   m_Layer: 0
   m_Name: Scout
   m_TagString: Enemy
@@ -233,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437461f5b7fab7f42b6cf719f5ad58ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathExplosionPrefab: {fileID: 5731705235410561775, guid: e1755e4811f4e40489193d8c5697b335,
+    type: 3}
 --- !u!114 &7605006296875512617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,7 +213,6 @@ MonoBehaviour:
     type: 3}
   barrels:
   - {fileID: 7160700574840676912}
-  projectilePool: {fileID: 0}
   rateOfFire: 0.5
 --- !u!114 &2653412951422022524
 MonoBehaviour:
@@ -277,3 +226,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c593a35b87e074ab356a516dad2e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 6
+  currentHealth: 0
+--- !u!61 &2740406108096194296
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7991762787055448613}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.15820634}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.94, y: 1.48}
+    newSize: {x: 1.36, y: 0.84}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6038685, y: 0.4428321}
+  m_EdgeRadius: 0
+--- !u!61 &127180182335178474
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7991762787055448613}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.28799963}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.94, y: 1.48}
+    newSize: {x: 1.36, y: 0.84}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.22369662, y: 0.45287395}
+  m_EdgeRadius: 0

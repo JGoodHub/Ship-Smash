@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3399571038554333917}
   m_Layer: 0
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,10 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5008123890054020037}
   - component: {fileID: 5008123890054020036}
-  - component: {fileID: 4411721657859111360}
   m_Layer: 0
   m_Name: Spaceship
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,50 +109,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &4411721657859111360
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5008123890054020042}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.06, y: 0.8}
-    newSize: {x: 1.06, y: 0.8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.16, y: -0.07}
-      - {x: 0.19, y: -0.37}
-      - {x: 0.22999999, y: -0.39999998}
-      - {x: 0.32, y: -0.39999998}
-      - {x: 0.53, y: -0.19}
-      - {x: 0.53, y: -0.049999997}
-      - {x: 0.42999998, y: 0.29999998}
-      - {x: 0.39, y: 0.32999998}
-      - {x: 0.26999998, y: 0.39999998}
-      - {x: -0.32999998, y: 0.39999998}
-      - {x: -0.41, y: 0.34}
-      - {x: -0.52, y: 0.08}
-      - {x: -0.53, y: 0.03}
-      - {x: -0.53, y: -0.21}
-      - {x: -0.34, y: -0.39999998}
-      - {x: -0.19999999, y: -0.39999998}
-      - {x: -0.14, y: -0.25}
-      - {x: -0.089999996, y: -0.28}
-      - {x: 0.13, y: -0.25}
 --- !u!1 &5008123890694062802
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +123,7 @@ GameObject:
   - component: {fileID: 5008123890694062797}
   - component: {fileID: 1756622516}
   - component: {fileID: 480225794241400586}
+  - component: {fileID: 3903791062625236642}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -225,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f1fbbe7efdb5b4ca784a58af9fcf3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathExplosionPrefab: {fileID: 5731705235410561775, guid: e1755e4811f4e40489193d8c5697b335,
+    type: 3}
 --- !u!114 &5008123890694062797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +214,6 @@ MonoBehaviour:
   barrels:
   - {fileID: 3399571038554333917}
   - {fileID: 7037090502032373797}
-  projectilePool: {fileID: 0}
   rateOfFire: 0.125
 --- !u!114 &480225794241400586
 MonoBehaviour:
@@ -270,6 +227,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c593a35b87e074ab356a516dad2e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+--- !u!61 &3903791062625236642
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5008123890694062802}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.006177321}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.06, y: 0.8}
+    newSize: {x: 1.06, y: 0.8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.82006264, y: 0.6700629}
+  m_EdgeRadius: 0
 --- !u!1 &9105045666976565342
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +266,7 @@ GameObject:
   - component: {fileID: 7037090502032373797}
   m_Layer: 0
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

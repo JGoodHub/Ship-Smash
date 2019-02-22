@@ -21,7 +21,12 @@ public class EnemyShipController : ShipController {
     private void FlipOrbitDirection () {
         orbitClockwise = !orbitClockwise;
         Invoke("FlipOrbitDirection", Random.Range(2f, 8f));
-    } 
+    }
+
+    public override void Die () {
+        EnemyManager.instance.Enemies.Remove(this);
+        base.Die();
+    }
 
 
 

@@ -8,8 +8,16 @@ public class StatsController : MonoBehaviour {
     [HideInInspector]
     public float currentHealth;
 
+
     public void Initialise() {
-        
+        currentHealth = maxHealth;
+    }
+
+    public void Damage (int amount) {
+        currentHealth -= amount;
+        if (currentHealth <= 0) {
+            GetComponent<ShipController>().Die();
+        }
     }
 
 }

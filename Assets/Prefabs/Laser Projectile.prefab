@@ -173,5 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
+  damage: 3
+  targetTag: 
   explosionPrefab: {fileID: 994606143559934733, guid: 86844364508638544809d8ce0f3335e9,
     type: 3}

@@ -9,7 +9,7 @@ public class MovementController : MonoBehaviour {
 
     private Rigidbody2D rigid2D;
     
-    void Start () {
+    public void Initialise () {
         rigid2D = GetComponent<Rigidbody2D>();
     }
 

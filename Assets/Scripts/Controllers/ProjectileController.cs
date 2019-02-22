@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour {
 
     public float speed;
+    public int damage;
 
     private Rigidbody2D rigid2D;
 
@@ -34,7 +35,9 @@ public class ProjectileController : MonoBehaviour {
             Destroy(explosionInstance, 0.267f);
             Destroy(gameObject);
 
-            //Deal Damage to others stats
+            //Deal Damage to the others stats
+            StatsController stats = other.GetComponent<StatsController>();
+            stats.Damage(damage);
         }
     }
 

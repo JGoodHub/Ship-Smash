@@ -16,6 +16,10 @@ public class AsteroidManager : MonoBehaviour {
         }
     }
 
+    //-----ENUMS-----
+
+    public enum Size { SMALL, MEDIUM, LARGE };
+
     //-----VARIABLES-----
 
     public Transform playerTransform;
@@ -32,30 +36,25 @@ public class AsteroidManager : MonoBehaviour {
     public GameObject largeAsteroidPrefab;
     public int largeAsteroidCount;
 
-
     public Vector2 fillSize;
 
     //-----METHODS-----
 
     public void Initialise () {
-        FillAsteroidCollection(smallAsteroidCollection, Asteroid.Size.SMALL, smallAsteroidPrefab, smallAsteroidCount);
-        FillAsteroidCollection(mediumAsteroidCollection, Asteroid.Size.MEDIUM, mediumAsteroidPrefab, mediumAsteroidCount);
-        FillAsteroidCollection(largeAsteroidCollection, Asteroid.Size.LARGE, largeAsteroidPrefab, largeAsteroidCount);
+        FillAsteroidCollection(smallAsteroidCollection, Size.SMALL, smallAsteroidPrefab, smallAsteroidCount);
+        FillAsteroidCollection(mediumAsteroidCollection, Size.MEDIUM, mediumAsteroidPrefab, mediumAsteroidCount);
+        FillAsteroidCollection(largeAsteroidCollection, Size.LARGE, largeAsteroidPrefab, largeAsteroidCount);
 
     }
 
-    private void FillAsteroidCollection (Transform collection, Asteroid.Size size, GameObject prefab, int count) {
+    private void FillAsteroidCollection (Transform collection, Size size, GameObject prefab, int count) {
         for (int i = 0; i < count; i++) {
             GameObject asteroidGameObjectInstance = Instantiate(prefab, new Vector3(Random.Range(-fillSize.x / 2, fillSize.x / 2), Random.Range(-fillSize.y / 2, fillSize.y / 2), 0), Quaternion.identity);
             asteroidGameObjectInstance.transform.SetParent(collection);
 
-            Asteroid asteroidScriptInstance = asteroidGameObjectInstance.GetComponent<Asteroid>();
+            AsteroidController asteroidScriptInstance = asteroidGameObjectInstance.GetComponent<AsteroidController>();
             asteroidScriptInstance.Initialise(size);
         }
-    }
-
-    void Update() {
-        
     }
 
     //-----GIZMOS-----
@@ -64,8 +63,5 @@ public class AsteroidManager : MonoBehaviour {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(Vector3.zero, (Vector3) fillSize);
     }
-
-
-
 
 }

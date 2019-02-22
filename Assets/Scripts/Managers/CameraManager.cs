@@ -29,7 +29,9 @@ public class CameraManager : MonoBehaviour {
     }
 
     void Update () {
-        transform.position = new Vector3(focusTarget.position.x, focusTarget.position.y, -10f);
+        if (focusTarget != null) {
+            transform.position = new Vector3(focusTarget.position.x, focusTarget.position.y, -10f);
+        }
     }
 
 
