@@ -40,13 +40,14 @@ public class AsteroidManager : MonoBehaviour {
 
     //-----METHODS-----
 
+    //Create asteroid of varying sizes
     public void Initialise () {
         FillAsteroidCollection(smallAsteroidCollection, Size.SMALL, smallAsteroidPrefab, smallAsteroidCount);
         FillAsteroidCollection(mediumAsteroidCollection, Size.MEDIUM, mediumAsteroidPrefab, mediumAsteroidCount);
         FillAsteroidCollection(largeAsteroidCollection, Size.LARGE, largeAsteroidPrefab, largeAsteroidCount);
-
     }
 
+    //Fill the asteroid fields based on the given parameters
     private void FillAsteroidCollection (Transform collection, Size size, GameObject prefab, int count) {
         for (int i = 0; i < count; i++) {
             GameObject asteroidGameObjectInstance = Instantiate(prefab, new Vector3(Random.Range(-fillSize.x / 2, fillSize.x / 2), Random.Range(-fillSize.y / 2, fillSize.y / 2), 0), Quaternion.identity);
@@ -58,6 +59,7 @@ public class AsteroidManager : MonoBehaviour {
     }
 
     //-----GIZMOS-----
+    
     public bool drawGizmos;
     void OnDrawGizmos () {
         Gizmos.color = Color.green;

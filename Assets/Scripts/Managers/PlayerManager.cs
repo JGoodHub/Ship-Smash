@@ -19,24 +19,26 @@ public class PlayerManager : MonoBehaviour {
 
     //-----VARIABLES-----
 
-    public ShipController player;
+    public ShipController playerController;
 
     //-----METHODS-----
 
+    //Sets up the player
     public void Initialise() {
-        player.Initialise();
+        playerController.Initialise();
     }
 
+    //Attempt to fire if the user presses the mouse button
     void Update () {
         if (Input.GetMouseButton(0)) {
-            player.ShootController.Fire("Enemy");
+            playerController.ShootController.Fire("Enemy");
         }
     }
 
+    //Thrust based on WASD keys and lok at the cursor
     void FixedUpdate () {
-        player.MovementController.Thrust (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
-        player.MovementController.LookAtTarget(CameraManager.mainCamera.ScreenToWorldPoint(Input.mousePosition));
+        playerController.MovementController.Thrust (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+        playerController.MovementController.LookAtTarget(CameraManager.mainCamera.ScreenToWorldPoint(Input.mousePosition));
     }
-
-
+    
 }

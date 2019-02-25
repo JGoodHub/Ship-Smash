@@ -23,10 +23,12 @@ public class GameManager : MonoBehaviour {
 
     //-----METHODS-----
 
+    //Sets up all other managers
     public void Start() {
         AsteroidManager.instance.Initialise();
         PlayerManager.instance.Initialise();
         EnemyManager.instance.Initialise();
+        CameraManager.instance.Initialise();
     }
 
 }

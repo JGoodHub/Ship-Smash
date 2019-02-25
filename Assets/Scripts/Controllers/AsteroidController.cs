@@ -10,6 +10,7 @@ public class AsteroidController : MonoBehaviour {
    
     //-----METHODS-----
 
+    //Set the asteroids scale and rotation speed to a random value based on size
     public void Initialise (AsteroidManager.Size size) {
         switch (size) {
             case AsteroidManager.Size.SMALL:
@@ -27,10 +28,9 @@ public class AsteroidController : MonoBehaviour {
         }
     }
 
+    //Rotate the asteroid by the set amount each frame
     void Update () {
         transform.Rotate(Vector3.forward, speed * Time.deltaTime);
     }
-
-
 
 }
