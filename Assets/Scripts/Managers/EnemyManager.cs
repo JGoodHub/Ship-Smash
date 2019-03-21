@@ -18,30 +18,45 @@ public class EnemyManager : MonoBehaviour {
 
     //-----VARIABLES-----
     
-    private HashSet<EnemyShipController> enemies = new HashSet<EnemyShipController>();
-    public HashSet<EnemyShipController> Enemies { get => enemies; }
-
+    [Header("Enemy Settings")]
     public GameObject enemyPrefab;
-
-    public float orbitDistance;
-    public float orbitHysteresis;
-
+    private HashSet<EnemyShipController> enemies = new HashSet<EnemyShipController>();
+    public HashSet<EnemyShipController> Enemies { get; }
+    public float spawnBorder;
+    public bool spawnEnemies;
+    
+    [Header("Player Settings")]
     public ShipController playerTarget;
+    public float orbitDistance;
+    public float orbitHysteresis;    
 
     //-----METHODS-----
 
     //Spawn a new enemy every second
     public void Initialise () {
-        InvokeRepeating("SpawnScout", 5f, 1f);
+        InvokeRepeating("SpawnScout", 0f, 1f);
     }
 
-    //Create a new enemy instance at a random location
+    //Create a new enemy instance at a random location on the border of the world
     private void SpawnScout () {
-        GameObject enemyInstance = Instantiate(enemyPrefab, new Vector3(Random.Range(-100f, 100f), Random.Range(-100f, 100f), 0), Quaternion.identity);
-        EnemyShipController enemyControllerInstance = (EnemyShipController) enemyInstance.GetComponent<ShipController>();
-        enemyControllerInstance.Initialise();
+        if (spawnEnemies) {
+            float spawnX = Random.Range(-spawnBorder, spawnBorder);
+            float spawnY = Random.Range(-spawnBorder, spawnBorder);
 
-        enemies.Add(enemyControllerInstance);
+            if (Mathf.Abs(spawnX) > Mathf.Abs(spawnY)) {
+                spawnX = spawnBorder * Sign(spawnX);
+            } else {
+                spawnY = spawnBorder * Sign(spawnY);
+            }
+
+            GameObject enemyObjectInstance = Instantiate(enemyPrefab, new Vector3(spawnX, spawnY, 0), Quaternion.identity);
+            enemyObjectInstance.transform.SetParent(gameObject.transform);
+
+            EnemyShipController enemyControllerInstance = (EnemyShipController)enemyObjectInstance.GetComponent<ShipController>();
+            enemyControllerInstance.Initialise();
+
+            enemies.Add(enemyControllerInstance);
+        }
     }
 
     //Have each enemy ship fly towards the player and try ti settle in an orbit around them
@@ -79,7 +94,19 @@ public class EnemyManager : MonoBehaviour {
         }
     }
 
-    //-----GIZMOS----- 
+    //Returns a normalised version of the float passed, indicating its sign
+    public int Sign (float num) {
+        if (num > 0) {
+            return 1;
+        } else if (num == 0) {
+            return 0;
+        } else {
+            return -1;
+        }
+    }
+
+    //-----GIZMOS-----
+    [Header("Gizmo Toggles")]
     public bool drawGizmos;
     void OnDrawGizmos () {
         if (drawGizmos) {
@@ -91,6 +118,10 @@ public class EnemyManager : MonoBehaviour {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(playerTarget.transform.position, orbitDistance + orbitHysteresis);
             Gizmos.DrawWireSphere(playerTarget.transform.position, orbitDistance - orbitHysteresis);
+
+            //The spawn border
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(Vector3.zero, new Vector3(spawnBorder, spawnBorder, 0f));
         }
     }
 

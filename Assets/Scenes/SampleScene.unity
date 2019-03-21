@@ -1242,9 +1242,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 7991762787055448613, guid: 0781cb304c77865429fb6657e448d864,
     type: 3}
+  spawnBorder: 150
+  spawnEnemies: 0
+  playerTarget: {fileID: 8364775668979177487}
   orbitDistance: 6
   orbitHysteresis: 2
-  playerTarget: {fileID: 8364775668979177487}
   drawGizmos: 0
 --- !u!1 &432995112
 GameObject:
@@ -1290,7 +1292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc6633b530fee840a99b831141cf9d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 8364775668979177487}
+  playerController: {fileID: 8364775668979177487}
 --- !u!4 &453558978 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8794297505354789139, guid: a2c7e18967b0994448be0fcd8c6b6204,
@@ -3210,6 +3212,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 731219158}
+  - {fileID: 1916633484}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5025,7 +5028,6 @@ Transform:
   - {fileID: 231964612}
   - {fileID: 787353317}
   - {fileID: 559183198}
-  - {fileID: 1916633484}
   m_Father: {fileID: 860941260}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5041,21 +5043,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11e673e808564a428580aaa61e80ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 1756622515}
   smallAsteroidCollection: {fileID: 231964612}
   smallAsteroidPrefab: {fileID: 3961181045555922070, guid: 24eafd574d8ba6643b0a4a74237b1ce2,
     type: 3}
-  smallAsteroidCount: 500
   mediumAsteroidCollection: {fileID: 787353317}
   mediumAsteroidPrefab: {fileID: 3961181045555922070, guid: b89dd98bd89a8e048b9d6a49fc8e7bdd,
     type: 3}
-  mediumAsteroidCount: 50
   largeAsteroidCollection: {fileID: 559183198}
   largeAsteroidPrefab: {fileID: 3961181045555922070, guid: cb6c6f9514da44e428e96a90fc30412d,
     type: 3}
-  largeAsteroidCount: 5
   fillSize: {x: 100, y: 100}
-  drawGizmos: 1
+  smallAsteroidCount: 500
+  mediumAsteroidCount: 50
+  largeAsteroidCount: 5
+  drawGizmos: 0
 --- !u!4 &1539447519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8794297505354789139, guid: a2c7e18967b0994448be0fcd8c6b6204,
@@ -6297,13 +6298,13 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1522814799}
-  m_RootOrder: 3
+  m_Father: {fileID: 958341876}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &1916633485
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

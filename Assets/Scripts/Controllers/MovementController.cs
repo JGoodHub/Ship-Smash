@@ -13,28 +13,42 @@ public class MovementController : MonoBehaviour {
 
     //-----METHODS-----
     
-    //Setup method
+    /// <summary>
+    /// Setup the movement controller
+    /// </summary>
     public void Initialise () {
         rigid2D = GetComponent<Rigidbody2D>();
     }
 
-    //Apply normalised thrust in the passed direction
+    /// <summary>
+    /// Apply normalised thrust in the passed direction
+    /// </summary>
+    /// <param name="direction">The direct of thrust</param>
     public void Thrust (Vector2 direction) {
         rigid2D.AddForce(direction.normalized * thrusterPower * Time.fixedDeltaTime);
     }
 
-    //Apply raw thrust in the passed direction
+    /// <summary>
+    /// Apply raw thrust in the passed direction
+    /// </summary>
+    /// <param name="direction">The direct of thrust</param>
     public void ThrustRaw (Vector2 direction) {
         rigid2D.AddForce(direction * thrusterPower * Time.fixedDeltaTime);
     }
 
-    //Snap to look at the passed target position
+    /// <summary>
+    /// Snap to look at the passed target position
+    /// </summary>
+    /// <param name="targetPosition"></param>
     public void LookAtTarget (Vector3 targetPosition) {
         targetPosition.z = transform.position.z;
         transform.up = targetPosition - transform.position;
     }
-
-    //Shorthand method for converting position to vector2
+ 
+    /// <summary>
+    /// Shorthand method for converting position to vector2
+    /// </summary>
+    /// <returns>Transform position as a Vector2</returns>
     public Vector2 Vector2Position () {
         return (Vector2) transform.position;
     }

@@ -30,7 +30,7 @@ public class PlayerManager : MonoBehaviour {
 
     //Attempt to fire if the user presses the mouse button
     void Update () {
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButton(0) && playerController.ShootController.CanShipFire()) {
             playerController.ShootController.Fire("Enemy");
         }
     }

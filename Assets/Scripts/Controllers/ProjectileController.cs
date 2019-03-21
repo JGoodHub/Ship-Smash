@@ -19,7 +19,11 @@ public class ProjectileController : MonoBehaviour {
 
     //-----METHODS-----
 
-    //Setup the object and set its lifespan to 5 seconds
+    /// <summary>
+    /// Setup the object and set its lifespan to 5 seconds
+    /// </summary>
+    /// <param name="_sourceTag">The tag of the gameObject that fired the projectile</param>
+    /// <param name="_targetTag">The tag of the gameObject thats the projectiles target</param>
     public void Initialise (string _sourceTag, string _targetTag) {
         rigid2D = GetComponent<Rigidbody2D>();        
         armingTime = Time.fixedDeltaTime * 2f;
@@ -27,16 +31,21 @@ public class ProjectileController : MonoBehaviour {
         targetTag = _targetTag;
         Destroy(gameObject, 5f);
     }
-   
-    //Move the projectile forward each frame
+
+    /// <summary>
+    /// Move the projectile forward each frame
+    /// </summary>
     public void FixedUpdate () {
         armingTime -= Time.fixedDeltaTime;
         rigid2D.MovePosition(transform.position + (transform.up * speed * Time.fixedDeltaTime));
     }
 
-    //If its armed and hits the target object then reduce that objects health and create an explsion
-    void OnTriggerEnter2D (Collider2D other) {
-        if (armingTime <= 0 && other.CompareTag(targetTag)) {
+    /// <summary>
+    /// If its armed and hits the target object then reduce that objects health and create an explosion
+    /// </summary>
+    /// <param name="other">The collider on the other side of the collision</param>
+    void OnTriggerStay2D (Collider2D other) {
+        if (armingTime <= 0 && (other.CompareTag(targetTag) || other.gameObject.layer == 8)) {
             //Create the explosion
             GameObject explosionInstance = Instantiate(explosionPrefab, transform.position + (transform.up * 0.1f), Quaternion.identity);
             explosionInstance.transform.SetParent(GameManager.instance.effectsPool);

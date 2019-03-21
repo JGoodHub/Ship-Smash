@@ -13,24 +13,28 @@ public class EnemyShipController : ShipController {
 
     //-----METHODS-----
 
-    //Set the call to flip orbit direction going
+    /// <summary>
+    /// Setup the enemy ship controller
+    /// </summary>
     public override void Initialise () {
         base.Initialise();
         Invoke("FlipOrbitDirection", Random.Range(1f, 2f));
     }
-    
-    //Recursively and randomly change the direction the ship orbits the player
+
+    /// <summary>
+    /// Recursively and randomly change the direction the ship orbits the player
+    /// </summary>
     private void FlipOrbitDirection () {
         orbitClockwise = !orbitClockwise;
         Invoke("FlipOrbitDirection", Random.Range(2f, 8f));
     }
 
-    //Deals with the object when its health reaches zero
+    /// <summary>
+    /// Deals with the object when its health reaches zero
+    /// </summary>
     public override void Die () {
         EnemyManager.instance.Enemies.Remove(this);
         base.Die();
     }
-
-
 
 }

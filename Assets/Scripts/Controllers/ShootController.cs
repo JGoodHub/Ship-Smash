@@ -20,9 +20,14 @@ public class ShootController : MonoBehaviour {
         fireCooldown -= Time.deltaTime;
     }
 
+    //Checks if the ships weapons can fire
+    public bool CanShipFire () {
+        return fireCooldown <= 0;
+    }
+
     //Fire a projectile from each barrel and set its intended target tag
     public void Fire (string targetTag) {
-        if (fireCooldown <= 0) {
+        if (CanShipFire()) {
             foreach (Transform barrel in barrels) {
                 GameObject projectileInstance = Instantiate(laserProjectile, barrel.position, barrel.rotation);
                 projectileInstance.transform.SetParent(GameManager.instance.projectilePool);

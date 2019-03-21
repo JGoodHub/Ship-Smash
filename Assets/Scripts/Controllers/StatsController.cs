@@ -7,8 +7,8 @@ public class StatsController : MonoBehaviour {
     //-----VARIABLES-----
 
     public int maxHealth;
-    [HideInInspector]
-    public float currentHealth;
+    private float currentHealth;
+    public float CurrentHealth { get; }
 
     //-----METHODS-----
 
@@ -21,7 +21,7 @@ public class StatsController : MonoBehaviour {
     public void Damage (int amount) {
         currentHealth -= amount;
         if (currentHealth <= 0) {
-            GetComponent<ShipController>().Die();
+            GetComponent<DeathHandler>().Die();
         }
     }
 

@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 740682126272027455}
   - component: {fileID: 1205626026842152224}
   m_Layer: 0
-  m_Name: Laser Projectile
+  m_Name: Medium Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8231231562460753277}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.258, y: 0.517, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8858302746959555837}

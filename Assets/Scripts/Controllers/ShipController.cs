@@ -19,7 +19,7 @@ public class ShipController : MonoBehaviour {
 
     //-----METHODS-----
 
-    //Setup the scripts variables
+    //Setup method
     public virtual void Initialise () {
         movementController = GetComponent<MovementController>();
         movementController.Initialise();
@@ -35,6 +35,14 @@ public class ShipController : MonoBehaviour {
         GameObject explosionInstance = Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosionInstance, 1f);
         Destroy(gameObject);
+    }
+
+    //-----GIZMOS-----
+    public bool drawGizmos;
+    void OnDrawGizmos () {
+        if (drawGizmos) {
+            
+        }
     }
 
 }
