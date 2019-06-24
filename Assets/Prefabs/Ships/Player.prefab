@@ -210,7 +210,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathExplosionPrefab: {fileID: 5731705235410561775, guid: e1755e4811f4e40489193d8c5697b335,
     type: 3}
-  drawGizmos: 0
 --- !u!114 &5008123890694062797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,8 +254,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c593a35b87e074ab356a516dad2e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10000
-  currentHealth: 0
+  maxHealth: 200
+  maxShield: 300
+  passiveShieldRegenRate: 5
+  shieldDownDuration: 4
+  activeShieldRegenRate: 20
+  activeRegenCooldown: 2
 --- !u!114 &4783780469937491214
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour {
     public void Start() {
         AsteroidManager.instance.Initialise();
         PlayerManager.instance.Initialise();
-        EnemyManager.instance.Initialise();
         CameraManager.instance.Initialise();
     }
 

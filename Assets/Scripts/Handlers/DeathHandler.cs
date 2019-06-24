@@ -18,6 +18,7 @@ public class DeathHandler : MonoBehaviour {
     public void Initialise () {
     }
 
+    
     public void Die () {
         switch (attachedTo) {
             case AttachedTo.SHIP:

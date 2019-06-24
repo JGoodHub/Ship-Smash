@@ -21,23 +21,26 @@ public class EnemyManager : MonoBehaviour {
     [Header("Enemy Settings")]
     public GameObject enemyPrefab;
     private HashSet<EnemyShipController> enemies = new HashSet<EnemyShipController>();
-    public HashSet<EnemyShipController> Enemies { get; }
+    public HashSet<EnemyShipController> Enemies { get => enemies; }
+
+
+    [Header("Spawn Settings")]
+    public AnimationCurve spawnFrequencyOverTime;
+    private float spawnTimer = 0;
     public float spawnBorder;
     public bool spawnEnemies;
-    
+
     [Header("Player Settings")]
     public ShipController playerTarget;
     public float orbitDistance;
-    public float orbitHysteresis;    
+    public float orbitHysteresis;
+    public float minRange;
 
     //-----METHODS-----
 
-    //Spawn a new enemy every second
-    public void Initialise () {
-        InvokeRepeating("SpawnScout", 0f, 1f);
-    }
-
-    //Create a new enemy instance at a random location on the border of the world
+    /// <summary>
+    /// Create a new enemy instance at a random location on the border of the world
+    /// </summary>
     private void SpawnScout () {
         if (spawnEnemies) {
             float spawnX = Random.Range(-spawnBorder, spawnBorder);
@@ -56,12 +59,23 @@ public class EnemyManager : MonoBehaviour {
             enemyControllerInstance.Initialise();
 
             enemies.Add(enemyControllerInstance);
-        }
+        }        
     }
 
-    //Have each enemy ship fly towards the player and try ti settle in an orbit around them
-    //When at the correct distance begin shooting at the player
+    /// <summary>
+    /// Have each enemy ship fly towards the player and try ti settle in an orbit around them
+    /// When at the correct distance begin shooting at the player
+    /// </summary>
     void Update () {
+        //Spawn new enemy if needed
+        spawnTimer -= Time.deltaTime;
+        if (spawnTimer <= 0) {
+            SpawnScout();
+            spawnTimer = 1f / spawnFrequencyOverTime.Evaluate(Time.time / 60f);
+            Debug.Log(spawnFrequencyOverTime.Evaluate(Time.time / 60f));
+        }
+
+        //Manage the enemies on each update
         foreach(EnemyShipController enemy in enemies) {
             if (playerTarget != null) {
                 enemy.MovementController.LookAtTarget(playerTarget.transform.position);
@@ -75,13 +89,13 @@ public class EnemyManager : MonoBehaviour {
                 }
 
                 //When within the right range open fire
-                if (distanceToPlayer < orbitDistance + orbitHysteresis) {
+                if (distanceToPlayer < orbitDistance + orbitHysteresis && distanceToPlayer > minRange) {
                     enemy.ShootController.Fire("Player");
 
                     //Thrust sideways in an attempt to evade the player
                     if (distanceToPlayer > orbitDistance - orbitHysteresis) {
                         Vector2 perpendicularDirection = Vector2.Perpendicular(enemy.MovementController.Vector2Position() - playerTarget.MovementController.Vector2Position()).normalized;
-                        if (enemy.OrbitClockwise) {
+                        if (enemy.orbitClockwise) {
                             enemy.MovementController.ThrustRaw(-perpendicularDirection * 0.5f);
                             //Debug.DrawRay(enemy.MovementController.transform.position, -perpendicularDirection.normalized * 2f, Color.red);
                         } else {
@@ -94,7 +108,11 @@ public class EnemyManager : MonoBehaviour {
         }
     }
 
-    //Returns a normalised version of the float passed, indicating its sign
+    /// <summary>
+    /// Returns a normalised version of the float passed, indicating its sign
+    /// </summary>
+    /// <param name="num"></param>
+    /// <returns></returns>
     public int Sign (float num) {
         if (num > 0) {
             return 1;
@@ -118,6 +136,9 @@ public class EnemyManager : MonoBehaviour {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(playerTarget.transform.position, orbitDistance + orbitHysteresis);
             Gizmos.DrawWireSphere(playerTarget.transform.position, orbitDistance - orbitHysteresis);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(playerTarget.transform.position, minRange);
 
             //The spawn border
             Gizmos.color = Color.green;

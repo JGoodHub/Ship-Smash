@@ -6,10 +6,7 @@ public class EnemyShipController : ShipController {
     
     //-----VARIABLES-----
 
-    private bool orbitClockwise = true;
-    public bool OrbitClockwise {
-        get { return orbitClockwise; }
-    }
+    public bool orbitClockwise;
 
     //-----METHODS-----
 

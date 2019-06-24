@@ -19,7 +19,9 @@ public class ShipController : MonoBehaviour {
 
     //-----METHODS-----
 
-    //Setup method
+    /// <summary>
+    /// Setup method
+    /// </summary>
     public virtual void Initialise () {
         movementController = GetComponent<MovementController>();
         movementController.Initialise();
@@ -30,19 +32,13 @@ public class ShipController : MonoBehaviour {
         statsController.Initialise();
     }
 
-    //Create a large explosion upon death
+    /// <summary>
+    /// Create a large explosion upon death
+    /// </summary>
     public virtual void Die () {
         GameObject explosionInstance = Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosionInstance, 1f);
         Destroy(gameObject);
-    }
-
-    //-----GIZMOS-----
-    public bool drawGizmos;
-    void OnDrawGizmos () {
-        if (drawGizmos) {
-            
-        }
     }
 
 }
