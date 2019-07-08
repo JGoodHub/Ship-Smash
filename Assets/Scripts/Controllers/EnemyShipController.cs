@@ -31,6 +31,7 @@ public class EnemyShipController : ShipController {
     /// </summary>
     public override void Die () {
         EnemyManager.instance.Enemies.Remove(this);
+        GameManager.instance.IncreaseScore(1);
         base.Die();
     }
 

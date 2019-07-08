@@ -72,7 +72,6 @@ public class EnemyManager : MonoBehaviour {
         if (spawnTimer <= 0) {
             SpawnScout();
             spawnTimer = 1f / spawnFrequencyOverTime.Evaluate(Time.time / 60f);
-            Debug.Log(spawnFrequencyOverTime.Evaluate(Time.time / 60f));
         }
 
         //Manage the enemies on each update

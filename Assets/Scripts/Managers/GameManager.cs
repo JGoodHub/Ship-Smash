@@ -21,6 +21,11 @@ public class GameManager : MonoBehaviour {
     public Transform projectilePool;
     public Transform effectsPool;
 
+    private int score = 0;
+    public int timeInSeconds = 0;
+
+    public bool enableKeyTrggeredError;
+
     //-----METHODS-----
 
     //Sets up all other managers
@@ -28,6 +33,30 @@ public class GameManager : MonoBehaviour {
         AsteroidManager.instance.Initialise();
         PlayerManager.instance.Initialise();
         CameraManager.instance.Initialise();
+        UIManager.instance.Initialise();
+    }
+
+    /// <summary>
+    /// Runs every frame
+    /// </summary>
+    void Update () {
+        timeInSeconds = Mathf.RoundToInt(Time.timeSinceLevelLoad);
+        UIManager.instance.DisplayTime(timeInSeconds);
+
+        if (enableKeyTrggeredError == true && Input.GetKeyDown(KeyCode.Q)) {
+            Debug.LogError("Pause");
+        }
+
+    }
+
+    /// <summary>
+    /// Increase the players score
+    /// </summary>
+    /// <param name="amount">The amount to increase the players score by</param>
+    public void IncreaseScore (int amount) {
+        score += amount;
+
+        UIManager.instance.SetScore(score);
     }
 
 }
